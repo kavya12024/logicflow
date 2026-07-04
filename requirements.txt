@@ -1,0 +1,7 @@
+openai>=1.0.0
+httpx>=0.25.0
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.0
+PyGithub>=2.0.0
+streamlit>=1.28.0
+numpy>=1.24.0

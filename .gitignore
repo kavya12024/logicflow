@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# LogicFlow specific data
+faiss_index/
+workspace/
+*.faiss
+*.pkl
+
+# Environment variables (contains your token!)
+.env
+
+# IDE
+.vscode/
+.idea/
