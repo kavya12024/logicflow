@@ -7,6 +7,11 @@ import os
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 @dataclass
 class OllamaConfig:
@@ -108,6 +113,14 @@ class LogicFlowConfig:
         "scala": "scalac -d /tmp /workspace/{file} 2>&1",
     })
     
+    test_commands: Dict[str, str] = field(default_factory=lambda: {
+        "python": "python -m unittest discover -s /workspace -p 'test_*.py' 2>&1",
+        "javascript": "npm test 2>&1",
+        "typescript": "npm test 2>&1",
+        "go": "go test ./... 2>&1",
+        "rust": "cargo test 2>&1",
+    })
+    
     language_extensions: Dict[str, List[str]] = field(default_factory=lambda: {
         "c": [".c"],
         "cpp": [".cpp", ".hpp", ".cc", ".cxx"],
@@ -159,6 +172,12 @@ class LogicFlowConfig:
         if not template:
             return f"echo 'No compiler configured for {language}'"
         return template.format(file=filename)
+
+    def get_test_command(self, language: str, test_file: Optional[str] = None) -> str:
+        """Get test command for a given language and optional test file."""
+        if test_file and language == "python":
+            return f"python -m unittest /workspace/{test_file} 2>&1"
+        return self.test_commands.get(language, "echo 'No test command configured'")
 
     def to_dict(self) -> Dict[str, Any]:
         """Serialize configuration to dictionary."""

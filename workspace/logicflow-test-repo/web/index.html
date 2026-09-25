@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator</title>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>Calculator</h1>
+    <form id="calculator-form">
+      <input id="first" type="number" step="any" required>
+      <select id="operation" aria-label="Operation">
+        <option value="add">+</option>
+        <option value="subtract">-</option>
+        <option value="multiply">*</option>
+        <option value="divide">/</option>
+      </select>
+      <input id="second" type="number" step="any" required>
+      <button type="submit">Calculate</button>
+    </form>
+    <output id="result" aria-live="polite"></output>
+  </main>
+</body>
+</html>
